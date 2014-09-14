@@ -24,7 +24,7 @@ const int VERY_SHORT_ANSWER_LENGTH = 2;
 
 void print_generic_response() {
 
-    static char *generic_responses[] = {
+    static const char *responses[] = {
         "How are you this beautiful day?",
         "Did you have a happy childhood?",
         "Did you hate your father?",
@@ -35,20 +35,20 @@ void print_generic_response() {
         NULL
     };
 
-    static int next_generic_response = 0;
+    static int next = 0;
 
-    if (!generic_responses[next_generic_response]) next_generic_response = 0;
+    if (!responses[next]) next = 0;
     
-    puts(generic_responses[next_generic_response++]);
+    puts(responses[next++]);
 }
 
 
 /* FABRICATED ANSWERS
  *********************/
 
-char *lookup_fabricated_answer(char *token) {
+const char *lookup_fabricated_answer(const char *token) {
 
-    static char *fabricated_answers[] = {
+    static const char *answers[] = {
         "no", "Tell me more about the detail.",
         "yes", "Tell me more about the detail.",
         "fuck", "Don't be so rude again!",
@@ -75,8 +75,8 @@ char *lookup_fabricated_answer(char *token) {
     };
 
     int index = 0;
-    while (fabricated_answers[index]) {
-        if (!strcmp(fabricated_answers[index], token)) return fabricated_answers[index + 1];
+    while (answers[index]) {
+        if (!strcmp(answers[index], token)) return answers[index + 1];
         index += 2;
     }
     return NULL;
@@ -90,7 +90,7 @@ char remembered_lines[MAX_REMEMBERED_LINES_COUNT][MAX_INPUT_BUFFER_SIZE];
 int next_remembered_line_enter_index = 0;
 int next_remembered_line_return_index = 0;
 
-void remember_line(char *line) {
+void remember_line(const char *line) {
     if (next_remembered_line_enter_index == MAX_REMEMBERED_LINES_COUNT) {
         next_remembered_line_enter_index = 0;
     }
@@ -98,7 +98,7 @@ void remember_line(char *line) {
     ++next_remembered_line_enter_index;
 }
 
-char *get_old_remembered_line() {
+const char *get_old_remembered_line() {
     if (next_remembered_line_enter_index != next_remembered_line_return_index)  {
         int result = next_remembered_line_return_index;
         ++next_remembered_line_return_index;
@@ -110,7 +110,7 @@ char *get_old_remembered_line() {
     return NULL;
 }
 
-bool is_line_remebered(char *line) {
+bool is_line_remebered(const char *line) {
     for (int index = 0; index < MAX_REMEMBERED_LINES_COUNT; ++index) {
         if (!strcmp(line, remembered_lines[index]))  return true;
     }
@@ -122,9 +122,9 @@ bool is_line_remebered(char *line) {
  * TOKENIZER
  ************/
 
-    char *position_in_input;
+    const char *position_in_input;
 
-char *next_token() {
+const char *next_token() {
 
     static char token[MAX_TOKEN_SIZE];
     
@@ -162,9 +162,9 @@ char *next_token() {
 
 void respond(char *input) {
     if (strlen(input) < VERY_SHORT_ANSWER_LENGTH)  { // short answer
-        char *remebered = get_old_remembered_line();
-        if (remebered) {
-            printf("You just said: %s\n", remebered);
+        const char *remembered = get_old_remembered_line();
+        if (remembered) {
+            printf("You just said: %s\n", remembered);
             puts("Tell me more.");
         }
         else {
@@ -185,9 +185,9 @@ void respond(char *input) {
     position_in_input = input;
     
     for (;;) {
-        char *token = next_token();
+        const char *token = next_token();
         if (!token) break;
-        char *fabricated_answer = lookup_fabricated_answer(token);
+        const char *fabricated_answer = lookup_fabricated_answer(token);
         if (fabricated_answer) {
             puts(fabricated_answer);
             return;
