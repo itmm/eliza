@@ -53,8 +53,8 @@ const char *lookup_fabricated_answer(const char *token) {
         "no", "Tell me more about the detail.",
         "yes", "Tell me more about the detail.",
         "fuck", "Don't be so rude again!",
-        "shet", "Don't be so rude again!",
-        "you", "Let't not talk about me.",
+        "shit", "Don't be so rude again!",
+        "you", "Let's not talk about me.",
         "think", "Why do you think that?",
         "hate", "So you hate something -- tell me more.",
         "what", "Why do you ask?",
@@ -71,7 +71,7 @@ const char *lookup_fabricated_answer(const char *token) {
         "unhappy", "Why are you unhappy?",
         "beautiful", "I'm sure you like her, don't you?",
         "like", "Why do you like that?",
-        "love", "Remember, love everthing what you love.",
+        "love", "Remember, love everything what you love.",
         NULL
     };
 
@@ -165,7 +165,7 @@ void respond(char *input) {
     if (strlen(input) < VERY_SHORT_ANSWER_LENGTH)  { // short answer
         const char *remembered = get_old_remembered_line();
         if (remembered) {
-            printf("You just said: %s\n", remembered);
+            printf("You just said: %s", remembered);
             puts("Tell me more.");
         }
         else {
@@ -176,10 +176,10 @@ void respond(char *input) {
     
     if (is_line_remebered(input))  {
         puts("Stop repeating yourself!");
-        return ;
+        return;
     }
     
-    if (strlen(input) > SHORT_ANSWER_LENGTH) { // remeber line
+    if (strlen(input) > SHORT_ANSWER_LENGTH) { // remember line
         remember_line(input);
     }
 
