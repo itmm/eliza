@@ -66,7 +66,7 @@ const char *lookup_fabricated_answer(const char *token) {
         "kill", "It is wrong to kill.",
         "jerk", "Don't ever call me a jerk!",
         "can't", "Don't be negative -- be positive.",
-        "failure", "Strive for success .",
+        "failure", "Strive for success.",
         "never", "Don't be negative -- be positive.",
         "unhappy", "Why are you unhappy?",
         "beautiful", "I'm sure you like her, don't you?",
