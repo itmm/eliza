@@ -125,7 +125,7 @@ bool is_line_remebered(char *line) {
 
     char *position_in_input;
 
-char *next_token () {
+char *next_token() {
 
     static char token[MAX_TOKEN_SIZE];
     
@@ -161,7 +161,7 @@ char *next_token () {
  * CREATE THE DOCTOR'S RESPONE
  ******************************/
 
-void respond (char *input) {
+void respond(char *input) {
     if (strlen(input) < VERY_SHORT_ANSWER_LENGTH && strcmp(input,"bye"))  { // short answer
         char *remebered = get_old_remembered_line();
         if (remebered) {
@@ -203,11 +203,11 @@ void respond (char *input) {
     }
 }
 
-int main () {
+int main(int argc, char **argv) {
     char input_buffer[MAX_INPUT_BUFFER_SIZE];
     print_generic_response();
     do {
-        printf (": ");
+        printf(": ");
         fgets(input_buffer, sizeof(input_buffer), stdin);
         respond(input_buffer);
     } while (strnstr(input_buffer,"bye", MAX_INPUT_BUFFER_SIZE) != input_buffer);
