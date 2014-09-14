@@ -61,7 +61,6 @@ char *lookup_fabricated_answer(char *token) {
         "need", "We all need many things -- is this special?",
         "why", "Remember, therapy is good for you.",
         "know", "How do you know that?",
-        "bye", "Your bill will be mailed to you.",
         "murder", "I don't like killing.",
         "kill", "It is wrong to kill.",
         "jerk", "Don't ever call me a jerk!",
@@ -162,7 +161,7 @@ char *next_token() {
  ******************************/
 
 void respond(char *input) {
-    if (strlen(input) < VERY_SHORT_ANSWER_LENGTH && strcmp(input, "bye"))  { // short answer
+    if (strlen(input) < VERY_SHORT_ANSWER_LENGTH)  { // short answer
         char *remebered = get_old_remembered_line();
         if (remebered) {
             printf("You just said: %s\n", remebered);
@@ -206,9 +205,13 @@ void respond(char *input) {
 int main(int argc, char **argv) {
     char input_buffer[MAX_INPUT_BUFFER_SIZE];
     print_generic_response();
-    do {
+    for (;;) {
         printf(": ");
         fgets(input_buffer, sizeof(input_buffer), stdin);
+        if (strnstr(input_buffer, "bye", MAX_INPUT_BUFFER_SIZE) == input_buffer) {
+            puts("Your bill will be mailed to you.");
+            break;
+        }
         respond(input_buffer);
-    } while (strnstr(input_buffer, "bye", MAX_INPUT_BUFFER_SIZE) != input_buffer);
+    }
 }
