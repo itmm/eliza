@@ -162,7 +162,7 @@ char *next_token() {
  ******************************/
 
 void respond(char *input) {
-    if (strlen(input) < VERY_SHORT_ANSWER_LENGTH && strcmp(input,"bye"))  { // short answer
+    if (strlen(input) < VERY_SHORT_ANSWER_LENGTH && strcmp(input, "bye"))  { // short answer
         char *remebered = get_old_remembered_line();
         if (remebered) {
             printf("You just said: %s\n", remebered);
@@ -210,5 +210,5 @@ int main(int argc, char **argv) {
         printf(": ");
         fgets(input_buffer, sizeof(input_buffer), stdin);
         respond(input_buffer);
-    } while (strnstr(input_buffer,"bye", MAX_INPUT_BUFFER_SIZE) != input_buffer);
+    } while (strnstr(input_buffer, "bye", MAX_INPUT_BUFFER_SIZE) != input_buffer);
 }
