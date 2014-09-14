@@ -1,12 +1,13 @@
 // Found on hackchina.com
 // Tidied up a little by David Bolton, http://cplus.about.com
 // Tidied up even more by Timm Knape, http://www.knp.de
-// This is in the public domain
+// This is in the public domain under MIT license
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+
 
 /* CONFIGURATION
  ****************/
@@ -15,8 +16,8 @@
 #define MAX_REMEMBERED_LINES_COUNT 100
 #define MAX_TOKEN_SIZE 80
 
-const int SHORT_ANSWER_LENGTH = 10;
-const int VERY_SHORT_ANSWER_LENGTH = 2;
+const int SHORT_ANSWER_LENGTH = 11;
+const int VERY_SHORT_ANSWER_LENGTH = 3;
 
 
 /* GENERIC RESPONSES
